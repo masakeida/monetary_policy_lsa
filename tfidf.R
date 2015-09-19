@@ -43,7 +43,7 @@ wordSet <- setdiff(
 );
 tfidf1 <- tfidf0[1:dim(tfidf0)[1] %in% wordSet,];
 
-##write.table(tfidf1, "tfidf1.txt", sep="\t", col.names=F, row.names=F);
+write.table(tfidf1, "tfidf1.txt", sep="\t", col.names=F, row.names=F);
 
 ### LSA
 lsa <- svd(tfidf1[,1:docNum]);
