@@ -1,5 +1,8 @@
+##
+args <- commandArgs(trailingOnly = T)
 
-docNum <- 6;
+##docNum <- as.numeric(args[1]);
+docNum <- 12;
 docWord <- read.table("docWords.txt", sep="\t");
 docMat <- docWord[,1:docNum];
 
@@ -26,21 +29,17 @@ tfidf <- cbind(tfidf, docWord[, (docNum+1):(docNum+6)]);
 criteria <- rep(FALSE, length=dim(docMat)[1]);
 for (i in 1:docNum) {
     criteria <- criteria |
-        tfidf[,i] >= apply(tfidf[,1:docNum], 2, quantile)[4,i];
+        tfidf[,i] >= quantile(tfidf[,i], 0.80);
 }
 
 tfidf0 <- tfidf[criteria,];
 
-##tfidf1 <- tfidf0[1:271 %in% grep("名詞", tfidf0[,7]),];
 wordSet <- setdiff(
     union(
-        grep("名詞", tfidf0[,docNum+4]),
-        grep("動詞", tfidf0[,docNum+4])
+        grep("^名詞", tfidf0[,docNum+4]),
+        grep("^動詞", tfidf0[,docNum+4])
     ),
-    union(
-        grep("助動詞", tfidf0[,docNum+4]),
-        grep("非自立", tfidf0[,docNum+4])
-    )
+    grep("非自立", tfidf0[,docNum+4])
 );
 tfidf1 <- tfidf0[1:dim(tfidf0)[1] %in% wordSet,];
 
@@ -74,5 +73,8 @@ for (i in 1:docNum) {
                  (sqrt(sum(docMatLSA[,i] * docMatLSA[,i])) *
                   sqrt(sum(docMatLSA[,j] * docMatLSA[,j])) );
              simResult[i, j] = similarity;
+             simResult[j, i] = similarity;
          }
 }
+
+write.table(simResult, "simResult.txt", sep="\t");

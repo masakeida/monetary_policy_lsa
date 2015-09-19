@@ -1,11 +1,10 @@
 #!/bin/sh
 
-#LF=$(printf '\\\012_')
-#LF=${LF%_}
-
 cat - |
     perl -pe 's/^(０|１|２|３|４|５|６|７|８|９|)+$//g' |
     perl -0pe 's/\n\n\n\f//g' |
+    # for the exception in kk1212b page 6
+    perl -0pe 's/(０|１|２|３|４|５|６|７|８|９|)+\n\n\f//g' |
     # 日本語の間に入った半角スペースを削除したいが、
     # 英語の半角スペースを消したくない。
     sed -e 's/\([a-zA-Z]\) \([a-zA-Z]\)/\1_S_\2/g' |
