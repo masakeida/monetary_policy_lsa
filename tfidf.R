@@ -45,7 +45,7 @@ tfidf1 <- tfidf0[1:dim(tfidf0)[1] %in% wordSet,];
 
 write.table(tfidf1, "tfidf1.txt", sep="\t", col.names=F, row.names=F);
 
-### LSA
+## LSA
 lsa <- svd(tfidf1[,1:docNum]);
 
 ## Primary Component Analysis
@@ -78,3 +78,18 @@ for (i in 1:docNum) {
 }
 
 write.table(simResult, "simResult.txt", sep="\t");
+
+## make document matrix not using LSA
+docMatNonLSA <- tfidf1[,1:docNum]
+
+### non LSA vector space method
+simResultNonLSA <- diag(docNum);
+for (i in 1:docNum) {
+    for (j in i:docNum) {
+             similarity = (docMatNonLSA[,i] %*% docMatNonLSA[,j]) /
+                 (sqrt(sum(docMatNonLSA[,i] * docMatNonLSA[,i])) *
+                  sqrt(sum(docMatNonLSA[,j] * docMatNonLSA[,j])) );
+             simResultNonLSA[i, j] = similarity;
+             simResultNonLSA[j, i] = similarity;
+         }
+}
