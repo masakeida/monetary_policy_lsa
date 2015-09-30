@@ -69,12 +69,12 @@ docMatLSA <- lsa$u[,1:index] %*% diag(lsa$d[1:index]) %*% t(lsa$v[,1:index]);
 simResult <- diag(docNum);
 for (i in 1:docNum) {
     for (j in i:docNum) {
-             similarity = (docMatLSA[,i] %*% docMatLSA[,j]) /
-                 (sqrt(sum(docMatLSA[,i] * docMatLSA[,i])) *
-                  sqrt(sum(docMatLSA[,j] * docMatLSA[,j])) );
-             simResult[i, j] = similarity;
-             simResult[j, i] = similarity;
-         }
+        similarity = (docMatLSA[,i] %*% docMatLSA[,j]) /
+            (sqrt(sum(docMatLSA[,i] * docMatLSA[,i])) *
+             sqrt(sum(docMatLSA[,j] * docMatLSA[,j])) );
+        simResult[i, j] = similarity;
+        simResult[j, i] = similarity;
+    }
 }
 
 write.table(simResult, "simResult.txt", sep="\t");
@@ -86,10 +86,10 @@ docMatNonLSA <- tfidf1[,1:docNum]
 simResultNonLSA <- diag(docNum);
 for (i in 1:docNum) {
     for (j in i:docNum) {
-             similarity = (docMatNonLSA[,i] %*% docMatNonLSA[,j]) /
-                 (sqrt(sum(docMatNonLSA[,i] * docMatNonLSA[,i])) *
-                  sqrt(sum(docMatNonLSA[,j] * docMatNonLSA[,j])) );
-             simResultNonLSA[i, j] = similarity;
-             simResultNonLSA[j, i] = similarity;
-         }
+        similarity = (docMatNonLSA[,i] %*% docMatNonLSA[,j]) /
+            (sqrt(sum(docMatNonLSA[,i] * docMatNonLSA[,i])) *
+             sqrt(sum(docMatNonLSA[,j] * docMatNonLSA[,j])) );
+        simResultNonLSA[i, j] = similarity;
+        simResultNonLSA[j, i] = similarity;
+    }
 }
