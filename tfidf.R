@@ -17,7 +17,7 @@ for (i in 1:docNum) {
 }
 
 tp <- docMat > 0;
-idf <- cbind(log(docNum/rowSums(tp)))+1;
+idf <- cbind(log(docNum/rowSums(tp) +1));
 
 idfs <- NULL
 for (i in 1:docNum) {
