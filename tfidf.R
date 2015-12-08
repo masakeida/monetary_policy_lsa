@@ -2,7 +2,7 @@
 args <- commandArgs(trailingOnly = T)
 
 ##docNum <- as.numeric(args[1]);
-docNum <- 12;
+docNum <- 41;
 docWord <- read.table("docWords.txt", sep="\t");
 docMat <- docWord[,1:docNum];
 
@@ -18,6 +18,7 @@ for (i in 1:docNum) {
 
 tp <- docMat > 0;
 idf <- cbind(log(docNum/rowSums(tp) +1));
+##idf <- cbind(log(docNum/rowSums(tp) ));
 
 idfs <- NULL
 for (i in 1:docNum) {
@@ -29,7 +30,8 @@ tfidf <- cbind(tfidf, docWord[, (docNum+1):(docNum+6)]);
 criteria <- rep(FALSE, length=dim(docMat)[1]);
 for (i in 1:docNum) {
     criteria <- criteria |
-        tfidf[,i] >= quantile(tfidf[,i], 0.80);
+        tfidf[,i] >= quantile(tfidf[,i], 0.90);
+        ##tfidf[,i] >= quantile(tfidf[,i], 0.80);
 }
 
 tfidf0 <- tfidf[criteria,];

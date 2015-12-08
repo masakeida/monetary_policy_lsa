@@ -33,5 +33,7 @@ do
 	fi
 	printf "\t"
     done
+    # % are meta words for printf. printf %% shows %.
+    line=`echo "${line}" | sed -e 's/%/%%/g'`
     printf "${line}\n"
 done
