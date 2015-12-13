@@ -24,7 +24,7 @@ idfs <- NULL
 for (i in 1:docNum) {
     idfs <- cbind(idfs, idf);
 }
-tfidf <- tf * idfs
+tfidf <- tf * idfs;
 tfidf <- cbind(tfidf, docWord[, (docNum+1):(docNum+6)]);
 
 criteria <- rep(FALSE, length=dim(docMat)[1]);
