@@ -2,7 +2,7 @@
 args <- commandArgs(trailingOnly = T)
 
 ##docNum <- as.numeric(args[1]);
-docNum <- 41;
+docNum <- 47;
 docWord <- read.table("docWords.txt", sep="\t");
 docMat <- docWord[,1:docNum];
 

@@ -16,6 +16,7 @@ cat - |
     grep -v ^$ |
     perl -pe 's/\n/__EOL__/g' |
     perl -pe 's/（問）(.*?)（答）/（答）/g' |
+    perl -pe 's/（答）//g' |
     perl -pe 's/__EOL__/\n/g'
     #grep -v ^（問）
 
