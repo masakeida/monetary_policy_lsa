@@ -53,9 +53,9 @@ lsa <- svd(tfidf1[,1:docNum]);
 ## Primary Component Analysis
 pri <- prcomp(tfidf1[,1:docNum], scale=TRUE);
 index = 0;
-for (i in 1:docNum) {
-    if (summary(pri)$importance[3,i] > 0.8) {
-        index = i;
+for (n in 1:docNum) {
+    if (summary(pri)$importance[3,n] > 0.8) {
+        index = n;
         break;
     }
 }
