@@ -95,3 +95,7 @@ for (i in 1:docNum) {
         simResultNonLSA[j, i] = similarity;
     }
 }
+
+## primaly axis of words
+primalyAxis <- - (data.matrix(tfidf1[,1:52]) %*% matrix(pri$rotation[,1]));
+write.table(primalyAxis, "primalyAxis.txt", sep="\t");
