@@ -36,12 +36,22 @@ for (i in 1:docNum) {
 
 tfidf0 <- tfidf[criteria,];
 
+#wordSet <- setdiff(
+#    grep("^名詞", tfidf0[,docNum+4]),
+#    union(
+#        grep("非自立", tfidf0[,docNum+4]),
+#        grep("接尾", tfidf0[,docNum+4])
+#    )
+#);        
 wordSet <- setdiff(
     union(
         grep("^名詞", tfidf0[,docNum+4]),
         grep("^動詞", tfidf0[,docNum+4])
     ),
-    grep("非自立", tfidf0[,docNum+4])
+    union(
+        grep("非自立", tfidf0[,docNum+4]),
+        grep("接尾", tfidf0[,docNum+4])
+    )
 );
 tfidf1 <- tfidf0[1:dim(tfidf0)[1] %in% wordSet,];
 
@@ -96,6 +106,27 @@ for (i in 1:docNum) {
     }
 }
 
-## primaly axis of words
-primalyAxis <- - (data.matrix(tfidf1[,1:52]) %*% matrix(pri$rotation[,1]));
-write.table(primalyAxis, "primalyAxis.txt", sep="\t");
+## 1st to 3rd axis of words
+firstAxis <- - (data.matrix(tfidf1[, 1:52]) %*% matrix(pri$rotation[, 1]));
+secondAxis <- (data.matrix(tfidf1[, 1:52]) %*% matrix(pri$rotation[, 2]));
+thirdAxis <- (data.matrix(tfidf1[, 1:52]) %*% matrix(pri$rotation[, 3]));
+
+firstAxis <- cbind(firstAxis, tfidf1[, 53:58]);
+secondAxis <- cbind(secondAxis, tfidf1[, 53:58]);
+thirdAxis <- cbind(thirdAxis, tfidf1[, 53:58]);
+
+firstAxis <- data.frame(firstAxis);
+names(firstAxis) <- c("value", "term", "yomi", "gokan", "type12", "type3", "type4");
+secondAxis <- data.frame(secondAxis);
+names(secondAxis) <- c("value", "term", "yomi", "gokan", "type12", "type3", "type4");
+thirdAxis <- data.frame(thirdAxis);
+names(thirdAxis) <- c("value", "term", "yomi", "gokan", "type12", "type3", "type4");
+
+firstAxisSorted <- firstAxis[order(firstAxis$value, decreasing=T),];
+write.table(firstAxisSorted, "firstAxisSorted.txt", sep="\t");
+
+secondAxisSorted <- secondAxis[order(secondAxis$value, decreasing=T),];
+write.table(secondAxisSorted, "secondAxisSorted.txt", sep="\t");
+
+thirdAxisSorted <- thirdAxis[order(thirdAxis$value, decreasing=T),];
+write.table(thirdAxisSorted, "thirdAxisSorted.txt", sep="\t");
