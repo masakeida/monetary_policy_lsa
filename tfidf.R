@@ -2,7 +2,7 @@
 args <- commandArgs(trailingOnly = T)
 
 ##docNum <- as.numeric(args[1]);
-docNum <- 52;
+docNum <- 55;
 docWord <- read.table("docWords.txt", sep="\t");
 docMat <- docWord[,1:docNum];
 
@@ -107,13 +107,13 @@ for (i in 1:docNum) {
 }
 
 ## 1st to 3rd axis of words
-firstAxis <- - (data.matrix(tfidf1[, 1:52]) %*% matrix(pri$rotation[, 1]));
-secondAxis <- (data.matrix(tfidf1[, 1:52]) %*% matrix(pri$rotation[, 2]));
-thirdAxis <- (data.matrix(tfidf1[, 1:52]) %*% matrix(pri$rotation[, 3]));
+firstAxis <- abs(data.matrix(tfidf1[, 1:docNum]) %*% matrix(pri$rotation[, 1]));
+secondAxis <- abs(data.matrix(tfidf1[, 1:docNum]) %*% matrix(pri$rotation[, 2]));
+thirdAxis <- abs(data.matrix(tfidf1[, 1:docNum]) %*% matrix(pri$rotation[, 3]));
 
-firstAxis <- cbind(firstAxis, tfidf1[, 53:58]);
-secondAxis <- cbind(secondAxis, tfidf1[, 53:58]);
-thirdAxis <- cbind(thirdAxis, tfidf1[, 53:58]);
+firstAxis <- cbind(firstAxis, tfidf1[, (docNum+1):(docNum+6)]);
+secondAxis <- cbind(secondAxis, tfidf1[, (docNum+1):(docNum+6)]);
+thirdAxis <- cbind(thirdAxis, tfidf1[, (docNum+1):(docNum+6)]);
 
 firstAxis <- data.frame(firstAxis);
 names(firstAxis) <- c("value", "term", "yomi", "gokan", "type12", "type3", "type4");
