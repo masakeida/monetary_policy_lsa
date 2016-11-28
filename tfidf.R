@@ -1,8 +1,8 @@
 ##
 args <- commandArgs(trailingOnly = T)
 
-##docNum <- as.numeric(args[1]);
-docNum <- 55;
+docNum <- as.numeric(args[1]);
+##docNum <- 55;
 docWord <- read.table("docWords.txt", sep="\t");
 docMat <- docWord[,1:docNum];
 
@@ -18,7 +18,6 @@ for (i in 1:docNum) {
 
 tp <- docMat > 0;
 idf <- cbind(log(docNum/rowSums(tp) +1));
-##idf <- cbind(log(docNum/rowSums(tp) ));
 
 idfs <- NULL
 for (i in 1:docNum) {
