@@ -4,4 +4,4 @@
 
     Usage
     % ./mkData.sh
-    % R ...
+
