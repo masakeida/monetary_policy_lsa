@@ -26,6 +26,7 @@ kk1611a.pdf
 
 The authors used FreeBSD 10.3-RELEASE and followings.
 
+* xpdf (for Japanese, you need Language Support Packages: xpdf-japanese.tar.gz and settings)
 * perl
 * python 2.7
 * MeCab
