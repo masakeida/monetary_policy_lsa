@@ -7,7 +7,7 @@
 
 ## What you need.
 
-* Data from BOJ web site
+###Data from BOJ web site
 
 55 reports for the regular press conference by the governor.
 
@@ -22,11 +22,11 @@ kk1508a.pdf kk1509c.pdf kk1510a.pdf kk1511a.pdf kk1511c.pdf kk1512d.pdf
 kk1602a.pdf kk1603b.pdf kk1605a.pdf kk1606c.pdf kk1608a.pdf kk1609b.pdf
 kk1611a.pdf
 
-* UNIX environment
+###UNIX environment
 
 The authors used FreeBSD 10.3-RELEASE and followings.
 
-** perl
-** python 2.7
-** MeCab
-** R
+* perl
+* python 2.7
+* MeCab
+* R
