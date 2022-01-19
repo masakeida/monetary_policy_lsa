@@ -2,6 +2,9 @@
 
 # monetary_policy_lsa
 
+The code for the paper Keida and Takeda (2017)
+https://www.rieti.go.jp/jp/publications/summary/17020007.html
+
     Usage
     % ./mainMPLSA.sh
 
